@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>English 11 - Unit 1: Looking Back</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --title-red: #d32f2f;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* --- WELCOME MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-card {
+            background: linear-gradient(135deg, #1565c0, #0d47a1);
+            color: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: modalBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-badge {
+            width: 85px; height: 85px;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 6px;
+            margin: 0 auto 15px auto;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-badge img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffd54f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .modal-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #e3f2fd;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .student-input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .student-input-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #ffd54f;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .student-input-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: #ffffff;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            transition: transform 0.2s;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            -webkit-appearance: none;
+        }
+
+        .modal-btn:active { transform: scale(0.96); }
+
+        @keyframes modalBounce {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* --- HEADER BANNER --- */
+        .title-banner {
+            position: relative;
+            width: 100%;
+            min-height: 160px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background-color: #0d47a1;
+        }
+
+        .banner-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('Picture1.jpg'), url('./Picture1.jpg');
+            background-size: cover;
+            background-position: center 40%;
+            filter: brightness(0.55) contrast(1.1);
+            z-index: 1;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(13, 71, 161, 0.85) 0%, rgba(21, 101, 192, 0.6) 100%);
+            z-index: 2;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .school-badge {
+            width: 85px; height: 85px;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .school-badge img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+        }
+
+        .title-group {
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .unit-tag {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffd54f;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .main-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7);
+            line-height: 1.1;
+        }
+
+        .sub-text {
+            font-size: 0.85rem;
+            color: #e3f2fd;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .author-tag {
+            color: #ffffff;
+            text-align: right;
+            font-size: 1rem;
+            font-weight: 700;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        /* --- TAB NAVIGATION --- */
+        .tab-nav {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 4px;
+            border: none;
+            background: #e9ecef;
+            color: #495057;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            -webkit-appearance: none;
+        }
+
+        .tab-btn.active {
+            background: var(--title-red);
+            color: #ffffff;
+            box-shadow: 0 -2px 8px rgba(211, 47, 47, 0.3);
+        }
+
+        /* --- TAB CONTENT --- */
+        .tab-content {
+            display: none;
+            background: #fafafa;
+            border-left: 5px solid var(--title-red);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+
+        .tab-content.active { display: block; }
+
+        .instruction {
+            font-weight: bold !important;
+            font-style: italic !important;
+            color: #444;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .question-box {
+            position: relative;
+            background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), 
+                        url('Picture1.jpg'), 
+                        url('./Picture1.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #c8d6e5;
+            padding: 16px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- MCQ OPTIONS CÙNG 1 DÒNG --- */
+        .mcq-options {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 8px;
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+
+        .mcq-options label {
+            flex: 1 1 0px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 8px 10px;
+            border: 1.5px solid #dcdde1;
+            border-radius: 8px;
+            background: #ffffff;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .mcq-options label:hover {
+            border-color: var(--secondary-color);
+            background: #f0f7ff;
+        }
+
+        .mcq-options input[type="radio"] {
+            margin-right: 6px;
+            width: 16px; height: 16px;
+            accent-color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+
+        select {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #ffffff;
+            max-width: 100%;
+        }
+
+        input[type="text"] {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #ffffff;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        .grammar-sentence {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .grammar-inputs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .next-tab-btn, .submit-btn {
+            display: block;
+            width: 100%;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+            -webkit-appearance: none;
+        }
+
+        .next-tab-btn { background: var(--secondary-color); }
+        .submit-btn { background: var(--success-color); font-size: 1.15rem; }
+        .next-tab-btn:active, .submit-btn:active { opacity: 0.85; }
+
+        .result-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .feedback {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 8px;
+            display: block;
+        }
+
+        .score-excellent { background-color: #d4edda; color: #155724; border: 2px solid #c3e6cb; }
+        .score-good { background-color: #d1ecf1; color: #0c5460; border: 2px solid #bee5eb; }
+        .score-average { background-color: #fff3cd; color: #856404; border: 2px solid #ffeeba; }
+        .score-poor { background-color: #f8d7da; color: #721c24; border: 2px solid #f5c6cb; }
+
+        @media screen and (max-width: 600px) {
+            body { padding: 8px; }
+            .container { padding: 15px; border-radius: 12px; }
+            .title-banner { padding: 15px; min-height: auto; }
+            .banner-content { flex-direction: column; align-items: flex-start; }
+            .main-title { font-size: 1.4rem; }
+            .school-badge { width: 65px; height: 65px; }
+            .author-tag { align-self: flex-end; font-size: 0.85rem; }
+            .tab-btn { font-size: 0.7rem; padding: 8px 2px; }
+            .grammar-inputs { flex-direction: column; align-items: stretch; }
+            input[type="text"] { max-width: 100%; }
+            .modal-card { padding: 25px 15px; }
+            .modal-title { font-size: 1.15rem; }
+            .modal-text { font-size: 0.95rem; }
+            .mcq-options label { font-size: 0.8rem; padding: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- WELCOME POPUP MODAL -->
+<div id="welcomeModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-badge">
+            <img src="z5276772533480_7aa160ada0cd51f4a091c5083143faaa-removebg-preview.png" alt="Chu Van An Logo" onerror="this.src='https://i.imgur.com/8Q9M2Zb.png';">
+        </div>
+        <div class="modal-title">WELCOME STUDENTS!</div>
+        <div class="modal-text">
+            Welcome to English Grade 11 - Unit 1 Looking Back Quiz at Chu Van An Continuing Education Center!
+        </div>
+        <div class="student-input-group">
+            <label for="studentNameInput">Nhập họ và tên của em:</label>
+            <input type="text" id="studentNameInput" placeholder="Ví dụ: Nguyễn Văn A">
+        </div>
+        <button class="modal-btn" onclick="closeWelcomeModal()">
+            <span>BẮT ĐẦU LÀM BÀI</span> 🚀
+        </button>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- HEADER BANNER -->
+    <div class="title-banner">
+        <div class="banner-bg"></div>
+        <div class="banner-overlay"></div>
+
+        <div class="banner-content">
+            <div class="banner-left">
+                <div class="school-badge">
+                    <img src="z5276772533480_7aa160ada0cd51f4a091c5083143faaa-removebg-preview.png" alt="Huy hiệu Chu Văn An" onerror="this.src='https://i.imgur.com/8Q9M2Zb.png';">
+                </div>
+
+                <div class="title-group">
+                    <span class="unit-tag">English 11 — Unit 1</span>
+                    <h1 class="main-title">LOOKING BACK</h1>
+                    <span class="sub-text">Pronunciation • Vocabulary • Grammar • Review Quiz (20 Qs)</span>
+                </div>
+            </div>
+
+            <div class="author-tag">
+                Teacher: Lê Thiện Phước
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB NAVIGATION -->
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('tab-pronunciation')">1. PRONUNCIATION</button>
+        <button class="tab-btn" onclick="switchTab('tab-vocabulary')">2. VOCABULARY</button>
+        <button class="tab-btn" onclick="switchTab('tab-grammar')">3. GRAMMAR</button>
+        <button class="tab-btn" onclick="switchTab('tab-quiz')">4. REVIEW QUIZ (20)</button>
+    </div>
+
+    <!-- TAB 1: PRONUNCIATION (ĐÚNG SGK LỚP 11 UNIT 1) -->
+    <div id="tab-pronunciation" class="tab-content active">
+        <p class="instruction">Circle the common pronunciation of the underlined auxiliary verbs. Then listen and check. Practise saying the conversations in pairs.</p>
+
+        <div class="question-box">
+            <p><strong>1. Doctor:</strong> <u>Have</u> you been examined yet?</p>
+            <div class="mcq-options">
+                <label><input type="radio" name="lb_p1_doc" value="A"> A. /hæv/</label>
+                <label><input type="radio" name="lb_p1_doc" value="B"> B. /həv/</label>
+            </div>
+            <p style="margin-top: 10px;"><strong>Nam:</strong> Yes, I <u>have</u>.</p>
+            <div class="mcq-options">
+                <label><input type="radio" name="lb_p1_nam" value="A"> A. /hæv/</label>
+                <label><input type="radio" name="lb_p1_nam" value="B"> B. /həv/</label>
+            </div>
+            <span id="lb_p1-feedback" class="feedback"></span>
+        </div>
+
+        <div class="question-box">
+            <p><strong>2. Trainer:</strong> <u>Can</u> you do this exercise routine?</p>
+            <div class="mcq-options">
+                <label><input type="radio" name="lb_p2_train" value="A"> A. /kæn/</label>
+                <label><input type="radio" name="lb_p2_train" value="B"> B. /kən/</label>
+            </div>
+            <p style="margin-top: 10px;"><strong>Nam:</strong> Yes, I <u>can</u>.</p>
+            <div class="mcq-options">
+                <label><input type="radio" name="lb_p2_nam" value="A"> A. /kæn/</label>
+                <label><input type="radio" name="lb_p2_nam" value="B"> B. /kən/</label>
+            </div>
+            <span id="lb_p2-feedback" class="feedback"></span>
+        </div>
+
+        <button class="next-tab-btn" onclick="switchTab('tab-vocabulary')">NEXT ➔</button>
+    </div>
+
+    <!-- TAB 2: VOCABULARY (ĐÚNG SGK LỚP 11 UNIT 1) -->
+    <div id="tab-vocabulary" class="tab-content">
+        <p class="instruction">Fill in each gap with ONE word. Use the words you have learnt in this unit.</p>
+
+        <div class="question-box">
+            <p>1. We need to <input type="text" id="lb_v1" placeholder="Type word..." style="max-width: 140px; display: inline-block;"> down on fast food if we don't want to <input type="text" id="lb_v2" placeholder="Type word..." style="max-width: 140px; display: inline-block;"> from heart diseases in the future.</p>
+            <span id="lb_v12-feedback" class="feedback"></span>
+        </div>
+
+        <div class="question-box">
+            <p>2. <input type="text" id="lb_v3" placeholder="Type word..." style="max-width: 140px; display: inline-block;"> out regularly and having a <input type="text" id="lb_v4" placeholder="Type word..." style="max-width: 140px; display: inline-block;"> diet are the key to a healthy life.</p>
+            <span id="lb_v34-feedback" class="feedback"></span>
+        </div>
+
+        <div class="question-box">
+            <p>3. Antibiotics are not used in the <input type="text" id="lb_v5" placeholder="Type word..." style="max-width: 150px; display: inline-block;"> of diseases caused by viruses.</p>
+            <span id="lb_v5-feedback" class="feedback"></span>
+        </div>
+
+        <button class="next-tab-btn" onclick="switchTab('tab-grammar')">NEXT ➔</button>
+    </div>
+
+    <!-- TAB 3: GRAMMAR (ĐÚNG SGK LỚP 11 UNIT 1) -->
+    <div id="tab-grammar" class="tab-content">
+        <p class="instruction">Circle the underlined part that is incorrect in each of the following sentences. Then correct it.</p>
+
+        <div class="question-box">
+            <p class="grammar-sentence">1. My grandfather <u>has gone</u> (A) to hospital <u>last month</u> (B). <u>He's fine</u> (C) now.</p>
+            <div class="grammar-inputs">
+                <select id="lb_g1-opt"><option value="">Select Error</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select>
+                <input type="text" id="lb_g1-text" placeholder="Type correct word...">
+            </div>
+            <span id="lb_g1-feedback" class="feedback"></span>
+        </div>
+
+        <div class="question-box">
+            <p class="grammar-sentence">2. Life expectancy <u>has been</u> (A) very low <u>in the past</u> (B). <u>Now</u> (C) it is higher.</p>
+            <div class="grammar-inputs">
+                <select id="lb_g2-opt"><option value="">Select Error</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select>
+                <input type="text" id="lb_g2-text" placeholder="Type correct word...">
+            </div>
+            <span id="lb_g2-feedback" class="feedback"></span>
+        </div>
+
+        <div class="question-box">
+            <p class="grammar-sentence">3. My father <u>used to do</u> (A) a lot of <u>exercise</u> (B) since he <u>was young</u> (C).</p>
+            <div class="grammar-inputs">
+                <select id="lb_g3-opt"><option value="">Select Error</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select>
+                <input type="text" id="lb_g3-text" placeholder="Type correct word...">
+            </div>
+            <span id="lb_g3-feedback" class="feedback"></span>
+        </div>
+
+        <div class="question-box">
+            <p class="grammar-sentence">4. I <u>was ill</u> (A) last week, and <u>did</u> (B) <u>not do</u> (C) much exercise so far <u>this week</u> (D).</p>
+            <div class="grammar-inputs">
+                <select id="lb_g4-opt"><option value="">Select Error</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+                <input type="text" id="lb_g4-text" placeholder="Type correct word...">
+            </div>
+            <span id="lb_g4-feedback" class="feedback"></span>
+        </div>
+
+        <button class="next-tab-btn" onclick="switchTab('tab-quiz')">NEXT ➔</button>
+    </div>
+
+    <!-- TAB 4: REVIEW QUIZ (ĐẢM BẢO ĐỦ 20 CÂU TỔNG THỂ CHO LỚP 11) -->
+    <div id="tab-quiz" class="tab-content">
+        <p class="instruction">Review Quiz (Grade 11 - Unit 1): Choose the best option (A, B, C, or D) to complete each question.</p>
+
+        <!-- Câu 1 -->
+        <div class="question-box">
+            <p><strong>1. A family that consists of parents and children is called a _____ family.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q1" value="A"> A. nuclear</label>
+                <label><input type="radio" name="q1" value="B"> B. extended</label>
+                <label><input type="radio" name="q1" value="C"> C. single</label>
+                <label><input type="radio" name="q1" value="D"> D. crowded</label>
+            </div>
+            <span id="q1-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 2 -->
+        <div class="question-box">
+            <p><strong>2. Conflicts between parents and children often arise due to the difference in _____.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q2" value="A"> A. generation gap</label>
+                <label><input type="radio" name="q2" value="B"> B. viewpoints</label>
+                <label><input type="radio" name="q2" value="C"> C. rules</label>
+                <label><input type="radio" name="q2" value="D"> D. income</label>
+            </div>
+            <span id="q2-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 3 -->
+        <div class="question-box">
+            <p><strong>3. My grandparents prefer living in an extended family because they can get support and _____ from relatives.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q3" value="A"> A. pressure</label>
+                <label><input type="radio" name="q3" value="B"> B. freedom</label>
+                <label><input type="radio" name="q3" value="C"> C. comfort</label>
+                <label><input type="radio" name="q3" value="D"> D. argument</label>
+            </div>
+            <span id="q3-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 4 -->
+        <div class="question-box">
+            <p><strong>4. Parents should learn to put themselves in their children's _____ to understand them better.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q4" value="A"> A. shoes</label>
+                <label><input type="radio" name="q4" value="B"> B. hands</label>
+                <label><input type="radio" name="q4" value="C"> C. hearts</label>
+                <label><input type="radio" name="q4" value="D"> D. minds</label>
+            </div>
+            <span id="q4-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 5 -->
+        <div class="question-box">
+            <p><strong>5. Jane _____ this mobile phone for three years. It still works very well.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q5" value="A"> A. has had</label>
+                <label><input type="radio" name="q5" value="B"> B. is having</label>
+                <label><input type="radio" name="q5" value="C"> C. had</label>
+                <label><input type="radio" name="q5" value="D"> D. has</label>
+            </div>
+            <span id="q5-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 6 -->
+        <div class="question-box">
+            <p><strong>6. Listen! Someone _____ at the front door.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q6" value="A"> A. knocks</label>
+                <label><input type="radio" name="q6" value="B"> B. is knocking</label>
+                <label><input type="radio" name="q6" value="C"> C. knocked</label>
+                <label><input type="radio" name="q6" value="D"> D. has knocked</label>
+            </div>
+            <span id="q6-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 7 -->
+        <div class="question-box">
+            <p><strong>7. I _____ what you mean, but I still think we should discuss it further.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q7" value="A"> A. am seeing</label>
+                <label><input type="radio" name="q7" value="B"> B. see</label>
+                <label><input type="radio" name="q7" value="C"> C. seeing</label>
+                <label><input type="radio" name="q7" value="D"> D. saw</label>
+            </div>
+            <span id="q7-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 8 -->
+        <div class="question-box">
+            <p><strong>8. He usually _____ up early to do exercise in the morning.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q8" value="A"> A. get</label>
+                <label><input type="radio" name="q8" value="B"> B. gets</label>
+                <label><input type="radio" name="q8" value="C"> C. is getting</label>
+                <label><input type="radio" name="q8" value="D"> D. got</label>
+            </div>
+            <span id="q8-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 9 -->
+        <div class="question-box">
+            <p><strong>9. My mother _____ traditional values and expects us to follow them.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q9" value="A"> A. value</label>
+                <label><input type="radio" name="q9" value="B"> B. values</label>
+                <label><input type="radio" name="q9" value="C"> C. is valuing</label>
+                <label><input type="radio" name="q9" value="D"> D. valued</label>
+            </div>
+            <span id="q9-feedback" class="feedback"></span>
+        </div>
+
+        <!-- Câu 10 -->
+        <div class="question-box">
+            <p><strong>10. Look at those dark clouds! It _____.</strong></p>
+            <div class="mcq-options">
+                <label><input type="radio" name="q10" value="A"> A. is going to rain</label>
+                <label><input type="radio" name="q10" value="B"> B. rains</label>
+                <label><input type="radio" name="q10" value="C"> C. rained</label>
+                <label><input type="radio" name="q10" value="D"> D. will rain</label>
+            </div>
+            <span id="q10-feedback" class="feedback"></span>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">SUBMIT ALL 20 QUESTIONS</button>
+    </div>
+
+    <div id="result" class="result-box"></div>
+</div>
+
+<script>
+    let audioCtx = null;
+    let studentName = "Học sinh";
+
+    function initAudioContext() {
+        if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    function playWelcomeMusic() {
+        initAudioContext();
+        if (!audioCtx) return;
+        const notes = [
+            { f: 523.25, t: 0.0, d: 0.2 },
+            { f: 659.25, t: 0.18, d: 0.2 },
+            { f: 783.99, t: 0.36, d: 0.2 },
+            { f: 1046.50, t: 0.54, d: 0.5 }
+        ];
+        notes.forEach(n => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(n.f, audioCtx.currentTime + n.t);
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime + n.t);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + n.t + n.d);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + n.t);
+            osc.stop(audioCtx.currentTime + n.t + n.d);
+        });
+    }
+
+    function closeWelcomeModal() {
+        const inputName = document.getElementById('studentNameInput').value.trim();
+        if(inputName !== "") {
+            studentName = inputName;
+        }
+        playWelcomeMusic();
+        const modal = document.getElementById('welcomeModal');
+        modal.style.opacity = '0';
+        setTimeout(() => { modal.style.display = 'none'; }, 400);
+    }
+
+    function switchTab(tabId) {
+        initAudioContext();
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+
+        if(tabId === 'tab-pronunciation') document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        if(tabId === 'tab-vocabulary') document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        if(tabId === 'tab-grammar') document.querySelectorAll('.tab-btn')[2].classList.add('active');
+        if(tabId === 'tab-quiz') document.querySelectorAll('.tab-btn')[3].classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function playAudioTone(isPerfect) {
+        initAudioContext();
+        if (!audioCtx) return;
+        const notes = isPerfect ? [
+            { f: 392.00, t: 0.0, d: 0.15 }, { f: 523.25, t: 0.15, d: 0.15 }, { f: 659.25, t: 0.30, d: 0.15 }, { f: 783.99, t: 0.45, d: 0.5 }
+        ] : [
+            { f: 392.00, t: 0.0, d: 0.2 }, { f: 329.63, t: 0.2, d: 0.2 }, { f: 261.63, t: 0.4, d: 0.4 }
+        ];
+        notes.forEach(n => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = isPerfect ? 'triangle' : 'sine';
+            osc.frequency.setValueAtTime(n.f, audioCtx.currentTime + n.t);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime + n.t);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + n.t + n.d);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + n.t);
+            osc.stop(audioCtx.currentTime + n.t + n.d);
+        });
+    }
+
+    function checkAnswers() {
+        let totalScore = 0;
+        const maxScore = 20; // Tổng 20 điểm/câu
+
+        // 1. Pronunciation (2 câu)
+        const p1Doc = document.querySelector('input[name="lb_p1_doc"]:checked');
+        const p1Nam = document.querySelector('input[name="lb_p1_nam"]:checked');
+        const p2Train = document.querySelector('input[name="lb_p2_train"]:checked');
+        const p2Nam = document.querySelector('input[name="lb_p2_nam"]:checked');
+        
+        let p1Correct = (p1Doc && p1Doc.value === 'B' && p1Nam && p1Nam.value === 'A');
+        let p2Correct = (p2Train && p2Train.value === 'B' && p2Nam && p2Nam.value === 'A');
+
+        if (p1Correct) totalScore++;
+        if (p2Correct) totalScore++;
+        
+        const pFb = document.getElementById('lb_p1-feedback');
+        pFb.style.color = (p1Correct && p2Correct) ? 'var(--success-color)' : 'var(--error-color)';
+        pFb.innerText = (p1Correct && p2Correct) ? '✓ Pronunciation correct! (2/2)' : '✗ Check auxiliary weak/strong forms.';
+
+        // 2. Vocabulary (5 từ vựng)
+        const v1 = document.getElementById('lb_v1').value.trim().toLowerCase();
+        const v2 = document.getElementById('lb_v2').value.trim().toLowerCase();
+        const v3 = document.getElementById('lb_v3').value.trim().toLowerCase();
+        const v4 = document.getElementById('lb_v4').value.trim().toLowerCase();
+        const v5 = document.getElementById('lb_v5').value.trim().toLowerCase();
+
+        let vScore = 0;
+        if (v1 === 'cut') vScore++;
+        if (v2 === 'suffer') vScore++;
+        if (v3 === 'working' || v3 === 'work') vScore++;
+        if (v4 === 'balanced') vScore++;
+        if (v5 === 'treatment') vScore++;
+
+        totalScore += vScore;
+        const vFb = document.getElementById('lb_v12-feedback');
+        vFb.style.color = (vScore === 5) ? 'var(--success-color)' : 'var(--error-color)';
+        vFb.innerText = `Vocabulary score: ${vScore}/5 correct.`;
+
+        // 3. Grammar error correction (4 câu)
+        const gAnswers = [
+            { opt: 'lb_g1-opt', text: 'lb_g1-text', correctOpt: 'A', correctWord: 'went', fb: 'lb_g1-feedback' },
+            { opt: 'lb_g2-opt', text: 'lb_g2-text', correctOpt: 'A', correctWord: 'was', fb: 'lb_g2-feedback' },
+            { opt: 'lb_g3-opt', text: 'lb_g3-text', correctOpt: 'A', correctWord: 'has done', fb: 'lb_g3-feedback' },
+            { opt: 'lb_g4-opt', text: 'lb_g4-text', correctOpt: 'B', correctWord: 'have not done', fb: 'lb_g4-feedback' }
+        ];
+        
+        gAnswers.forEach((g) => {
+            const userOpt = document.getElementById(g.opt).value;
+            const userText = document.getElementById(g.text).value.trim().toLowerCase();
+            const fbElem = document.getElementById(g.fb);
+            if (userOpt === g.correctOpt && userText.includes(g.correctWord.toLowerCase())) {
+                totalScore++;
+                fbElem.style.color = 'var(--success-color)';
+                fbElem.innerText = `✓ Correct!`;
+            } else {
+                fbElem.style.color = 'var(--error-color)';
+                fbElem.innerText = `✗ Correct: ${g.correctOpt} ➔ ${g.correctWord}`;
+            }
+        });
+
+        // 4. Review Quiz MCQ (9 câu trắc nghiệm cuối)
+        const mcqAnswers = [
+            { name: 'q1', correct: 'A' },
+            { name: 'q2', correct: 'A' },
+            { name: 'q3', correct: 'C' },
+            { name: 'q4', correct: 'A' },
+            { name: 'q5', correct: 'A' },
+            { name: 'q6', correct: 'B' },
+            { name: 'q7', correct: 'B' },
+            { name: 'q8', correct: 'B' },
+            { name: 'q9', correct: 'B' }
+        ];
+
+        mcqAnswers.forEach((q) => {
+            const selected = document.querySelector(`input[name="${q.name}"]:checked`);
+            const fbElem = document.getElementById(`${q.name}-feedback`);
+            if (selected && selected.value === q.correct) {
+                totalScore++;
+                if(fbElem) { fbElem.style.color = 'var(--success-color)'; fbElem.innerText = `✓ Correct!`; }
+            } else {
+                if(fbElem) { fbElem.style.color = 'var(--error-color)'; fbElem.innerText = `✗ Incorrect!`; }
+            }
+        });
+
+        // Render Result tổng 20 câu
+        const resultBox = document.getElementById('result');
+        resultBox.style.display = 'block';
+        const percentage = Math.round((totalScore / maxScore) * 100);
+        let scoreClass = percentage >= 85 ? 'score-excellent' : (percentage >= 70 ? 'score-good' : (percentage >= 50 ? 'score-average' : 'score-poor'));
+        let titleText = percentage >= 85 ? 'EXCELLENT WORK!' : (percentage >= 70 ? 'GOOD JOB!' : 'KEEP TRYING!');
+
+        resultBox.className = `result-box ${scoreClass}`;
+        resultBox.innerHTML = `
+            <div class="result-title">${titleText}</div>
+            <p style="text-align:center; font-size:1.1rem;">Học sinh: <strong>${studentName}</strong></p>
+            <p style="text-align:center; font-size:1.1rem;">Your Total Score: <strong>${totalScore} / ${maxScore}</strong> (${percentage}%)</p>
+        `;
+
+        playAudioTone(totalScore === maxScore);
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+
+        sendResultToEmail(studentName, totalScore, maxScore, percentage);
+    }
+
+    function sendResultToEmail(name, score, max, percent) {
+        const scriptURL = 'https://script.google.com/macros/s/THEO_URL_CUA_BAN/exec';
+        if (scriptURL.includes('THEO_URL_CUA_BAN')) return;
+
+        const data = {
+            studentName: name,
+            score: score + '/' + max,
+            percentage: percent + '%',
+            time: new Date().toLocaleString()
+        };
+
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).catch(error => console.error('Error sending email data:', error));
+    }
+</script>
+
+</body>
+</html>
